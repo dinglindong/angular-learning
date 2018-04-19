@@ -1,0 +1,237 @@
+//秘钥以及region
+Region : oss-cn-beijing
+AccessKeyId: LTAIIhM3CmF30nvx
+AccessKeySecret: D89p2eOat3KRtVFcImZGkKkP4Gsvpc
+bucket: orchidadoration
+
+Demo 用的路径
+oss://orchidadoration/demo
+
+//、、、、、
+1、触发算法分析
+URL : someplace
+Method : POST
+Path Param : Request Body
+{
+    "namespace": "xxx", // 新增：第三方域名
+    "ImageUid": "xxx", // 图片的名字，作为回传的唯一标识符
+    "accessKeyId": "xxx", // id
+    "accessKeySecret": "xxx", // key
+    "securityToken": "xxx", // OSS STS token
+    "endpoint": "xxx", // endPoint
+    "bucketName": "xxx", // bucketName
+    "key": "xxx" // study path,
+    "analysis": "OA"// 要做的分析类型 "OA"
+    "resultCallBackUrl":"xxx"
+}
+
+Response Content-Type : application/json
+Response
+{
+    "returnCode": "000000", // 返回状态
+    "returnMessage": "OK" // 返回信息
+}
+
+2、接收算法分析返回结果
+
+URL : someplace
+Method : POST
+Path Param : Request Body
+{
+    "returnCode": "000000", // 返回状态
+    "returnMessage": "OK", // 返回信息，“ok”成功，其他为报错信息
+    "namespace": "xxx", // 新增：第三方域名
+    "ImageUid": "xxx", // 图片的名字，作为回传的唯一标识符
+“Boxes": [ // 如果分析类型是"Ballooning" 有该字段，否则为空
+    {
+        "BoxUid": "xxxxx”, (5digit数)
+        "Coordinates": [x_min,y_min,x_max,y_max],
+        "Class":"KL1级"
+    },
+    {
+        "BoxUid": "xxxxx”, (5digit数)
+        "Coordinates": [x_min,y_min,x_max,y_max],
+        "Class":"KL1级"
+    }
+]
+}
+
+Response Content-Type : application/json
+Response
+{
+    "returnCode": "000000", // 返回状态
+    "returnMessage": "OK" // 返回信息，“ok”成功，其他为报错信息
+}
+
+
+
+//分析接口
+
+接口设计
+应用系统域名：medical.aliyun.com
+1、DICOM文件触发一次智能分析：第三方--->医疗数据分析平台
+
+Provider : 阿里云
+URL : /dicom/api/executeAnalysis（阿里云数据分析平台提供的接口，用于第三方客户调用执行医疗影像图片（dicom、jpg等格式）分析）
+Method : POST
+Headers : "tokenId" = xxx,（应用系统生成提供）  "namespace" = xxx（和调用方约定）
+Path Param : Request Body
+{
+"studyInstanceUid": "xxx", // 检查事件的编号
+"studyType": 4,  // 1：肺结节CT；2：胸腔X光；3：眼底；4：骨关节分析
+"statusNotifyCallBackUrl": "http://xxx/api/taskStatus",  // 用于回调，通知第三方dicom分析成功/失败
+以下高亮参数均为阿里云OSS下载文件的相关参数，用于下载dicom/jpg等图片，合作方客户需要事先使用阿里云OSS上传需要分析的图片，具体OSS的使用文档见 https://help.aliyun.com/document_detail/31886.html?spm=5176.doc31849.6.566.KXr4lr
+    "accessKeyId": "xxx", // OSS账号id
+"accessKeySecret": "xxx", // OSS账号key
+"securityToken": "xxx", // OSS STS token
+    "endpoint": "xxx", // OSS服务器域名
+    "bucketName": "xxx", // OSS对象存储空间
+"key": "xxx" , // OSS服务器对象存储key（传study path即可分析一次study的全部dicom）
+"forceAnalysis": true, //dicom文件变化后使用，true：强制再次执行算法分析
+}
+Response Content-Type : application/json
+Response
+{
+    "returnCode": "000000", // 返回状态，000000--成功，1000xx -- 1000系统内部错误
+"returnMessage": "OK", // 返回信息，成功：OK，失败：具体的errorMsg
+“solution": "", //（异常错误解决办法，暂时没用到，保留）
+"requestId": "7942c291-c720-49bd-942c-772cdc390a9e", //（每次调用接口，系统自动生成）
+"data": true, //（一般POST请求data为true/false，GET请求为返回具体data，详见下面的GET接口）
+"success": true //（成功：true，失败：false）
+}
+2、接受结果分析的状态通知：医疗数据分析平台--->第三方
+Provider : 第三方提供
+URL : http://xxx/api/taskStatus（第三方自己定义接口，用于阿里云数据分析平台回调，通知DICOM分析状态：成功或失败）
+Method : POST
+Path Param : Request Body
+{
+"studyInstanceUid": "xxx", // 检查的编号
+"studyType": 4,  // 1：肺结节CT；2：胸腔X光；3：眼底；4：骨关节分析
+"status": 0, // 0代表dicom分析结束-成功，-1代表分析结束-失败
+"errorCode": "XXX", // 记录dicom分析失败错误码，
+"errorMessage": "XXX" // 记录dicom分析失败原因, 分析成功为null，
+}
+Response Content-Type : application/json
+Response
+{
+    "code": 0, // 返回状态， 0--成功，其他代表失败
+    "message": "OK" // 返回信息
+}
+
+3、查询分析结果：第三方--->医疗数据分析平台
+Provider : 阿里云
+URL : /dicom/api/getAnalysisResult? studyInstanceUid=xxx & studyType=1
+Method : GET
+Headers : "tokenId" = xxx,  "namespace" = xxx
+Response Content-Type : application/json
+Response
+{
+    "returnCode": "000000",
+"returnMessage": "OK",
+“solution": "",
+"requestId": "57f42446-5d54-4b2c-bb03-dee57dd482a4",
+"data":{
+        "studyInstanceUid": "xxx", //检查序列的编号
+    "studyType": 4,  // 1：肺结节CT；2：胸腔X光；3：眼底糖网分析；4：骨关节分析
+    "boxes": [
+        {
+            "boxUid": "12345”, (5位数UID标记)
+            "coordinates": [x_min,y_min,x_max,y_max], （节点坐标）
+	            "class":"KL1级"
+        },
+        {
+            "boxUid": "67890”, (5位数UID标记)
+            "coordinates": [x_min,y_min,x_max,y_max], （节点坐标）
+            "class":"KL2级"
+        }
+    ],
+    "ocularDataList": [
+       {
+         "indexId": "c5862a5c-903c-48c9-8480-61699a6b7eca",
+         "analysisInstanceUid": "9d835d0c-5487-44ab-b824-5b82f8ea5e78",
+         "eye": “OS” ,  // “OS”：左眼；“OD”：右眼
+         "dr": 0,  // 糖尿病视网膜病变，0：未见明显异常特征； 1：可见 I 期病变特征；2：可见 II 期病变特征；3：可见 III 期病变特征；4：可见 IV 期及 IV 期以上病变特征
+         "dme": 0,  // DME 特征 0：未见 DME 特征；1：可见 DME 特征
+         "confidence": 0.8900,  // 自信度
+         "imgCenter": “DISC”,   // 图像中心，“DISC”：视盘；“MACULA”：黄斑'
+         “imgQuality”: “VERY_GOOD” // 图像质量 [ VERY_GOOD, GOOD, NEUTRAL, POOR, VERY_POOR ]
+         “inspection”: “未见明显异常特征，未见 DME 特征”  //筛查意见
+        “inspectionModel”: “AIFC50” // 筛查结果模版型号 [ AIFC40, AIFC50, AIFC60, AIFC70, AIFC80 ]
+       }
+],
+    "xRayDataList": [
+       {
+         "indexId": "c5862a5c-903c-48c9-8480-61699a6b7eca",
+         "posProb": 0.9537, //自信度
+         "posMap": [[0.030962157878928708, 0.04355239679201049
+],[0.030962157878928708,0.04355239679201049],[0.030962157878928708, 0.04355239679201049]]
+       }
+],
+        "imageDataList":[
+            {
+                "indexId": "xxx", // 结节唯一编号UUID，用来后面打标用
+                "seriesInstanceUid" : "xxx", //序列编号
+                "spacing": [xxx,xxx,xxx], // 偏移量
+                "origin": [xxx,xxx,xxx], // 原点坐标
+                "x":23.12, // 结节x坐标
+                "y":23.12, // 结节y坐标
+                "z":23.00, // 结节z坐标
+                "diameter":1.0, //结节直径
+                "confidence":0.889, //自信度（用数值来标识准确度）
+                “credibility”: null, //医生反馈分析结果，GET请求初次返回值为null，用于后续submitAnalysisFeedback接口调用回刷新该字段
+                "category":"ggo" // 肺结节类型ggo：磨玻璃、solid：实心、part-solid：半实心、unknown：未知类型
+                “lung” : "left",  // ["left", "right", "unknow"]
+                “lobe”: ”up”  // ["up", "middle", "down", "unknow"]
+            },
+            {
+                "indexId": "xxx", // 结节唯一编号UUID，用来后面打标用
+                "seriesInstanceUid" : "xxx", //序列编号
+                "spacing": [xxx,xxx,xxx], // 偏移量
+                "origin": [xxx,xxx,xxx], // 原点坐标
+                "x":23.12,
+                "y":23.12,
+                "z":23.00,
+                "diameter":1.0, //直径
+                "confidence":0.213, //自信度（用数值来标识准确度）
+                “credibility”: null,
+                "category":"part-solid" // 肺结节类型
+             “lung” : "left",  // ["left", "right", "unknow"]
+                “lobe”: ”up”  // ["up", "middle", "down", "unknow"]
+            }
+        ]
+    }
+}
+
+4、反馈分析结果准确率：第三方--->医疗数据分析平台
+Provider : 阿里云
+URL : /dicom/api/submitAnalysisFeedback
+Method : POST
+Headers : "tokenId" = xxx,  "namespace" = xxx
+Path Param : studyInstanceUid
+{
+"studyInstanceUid": "xxx", // //检查序列的编号
+"studyType": 1,  // 1：肺结节CT；2：胸腔X光；3：眼底
+    "data":
+    [
+        {
+            "indexId" : “xxx”,// 每个结节的唯一编号UUID
+            "credibility":"Y" // Y(准确)/N(不准确)/UN(不确定)
+        },
+        {
+            "indexId" : “xxx”,// 每个结节的唯一编号UUID
+            "credibility":"Y" // Y(准确)/N(不准确)/UN(不确定)
+        }
+    ]
+}
+
+Response Content-Type : application/json
+Response
+{
+    "returnCode": "000000",  // 返回状态，000000--成功，1000xx -- 1000系统内部错误
+"returnMessage": "OK"  // 返回信息
+“solution": "",
+"requestId": "7304abde-7bc8-4aa6-8812-c5264862747a",
+"data": true,
+"success": true
+}
+
