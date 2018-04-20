@@ -1,0 +1,27 @@
+.container{
+  text-align: center;
+  .title{
+    margin:1rem 0 .5rem 0;
+    font-size:0.8rem;
+  }
+  .description{
+    font-size:0.5rem;
+    margin-bottom:0.5rem;
+  }
+  .list{
+    background:#dddddd;
+    height:1rem;
+    line-height: 1rem;
+    padding-left:0.2rem;
+    margin-bottom:0.5rem;
+    font-size:0.4rem;
+    :first-child{
+      float:left;
+      margin-left:0.5rem;
+    }
+    :last-child{
+      float:right;
+      margin-right:0.5rem;
+    }
+  }
+}

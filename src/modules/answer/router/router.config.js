@@ -1,24 +1,19 @@
 /**
  * Create By DingLindong on 2018/4/19
  */
-import Template from '../components/Result.vue'
-import App from '../App'
+import Template from '../components/Template.vue'
+import Result from '../components/Result.vue'
 
 export default {
+    mode: 'history',
     routes:[
         {
-            path: '/',
-            component: App
-            // children: [{
-            //     path: '',
-            //     component: r => require.ensure([], () => r(require('../page/home')), 'home')
-            // }, {
-            //     path: '/item',
-            //     component: r => require.ensure([], () => r(require('../page/item')), 'item')
-            // }, {
-            //     path: '/score',
-            //     component: r => require.ensure([], () => r(require('../page/score')), 'score')
-            // }]
+            path: '*',
+            component: Template
+        },
+        {
+            path: '/result',
+            component: Result
         }
     ]
 }

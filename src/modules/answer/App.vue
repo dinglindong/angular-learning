@@ -1,21 +1,12 @@
 <template>
     <section class="main">
-        <HeaderBar />
-        <Bannerbar />
-        <Options />
+        <router-view></router-view>
     </section>
 </template>
 
 <script>
-    import HeaderBar from './components/HeaderBar.vue'
-    import Bannerbar from './components/Bannerbar.vue'
-    import Options from './components/Options.vue'
     export default{
-        components:{
-            HeaderBar,
-            Bannerbar,
-            Options
-        }
+
     }
 </script>
 

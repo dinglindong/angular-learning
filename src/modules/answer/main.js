@@ -8,7 +8,10 @@ import store from './store/store'
 
 import Router from 'vue-router';
 import routes from "./router/router.config";
-console.log(store)
+
+import FastClick from 'fastclick'
+FastClick.attach(document.body);
+
 Vue.use(Router);
 const router  = new Router(routes);
 
