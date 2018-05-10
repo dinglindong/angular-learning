@@ -44,45 +44,72 @@
                     jsApiList: [
                         'onMenuShareTimeline',
                         'onMenuShareAppMessage',
-                        'onMenuShareQQ'
+                        'onMenuShareQQ',
+                        'onMenuShareWeibo',
+                        'onMenuShareQZone'
                     ] // 必填，需要使用的JS接口列表
                 });
 
                 wx.ready(function(){
-                    wx.onMenuShareAppMessage({
-                        title: '分享11111111111111',
-                        desc: '测试分享11111111111111',
-                        link: window.location.href,
-                        imgUrl: 'http://orthophoto.allinmd.cn/static/images/wap/shareImg.png',
-                        success: function() {
-                            alert('分享成功')
+                    wx.onMenuShareTimeline({
+                        title: '分享到朋友圈', // 分享标题
+                        link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: '', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
                         },
-                        cancel: function() {
-
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
                         }
                     });
-                    wx.onMenuShareTimeline({
-                        title: '分享2222222222222',
-                        desc: '测试分享2222222222222',
-                        link: window.location.href,
-                        imgUrl: 'http://orthophoto.allinmd.cn/static/images/wap/shareImg.png',
-                        success: function() {
-
+                    wx.onMenuShareAppMessage({
+                        title: '分享给朋友', // 分享标题
+                        desc: '', // 分享描述
+                        link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: '', // 分享图标
+                        type: '', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
                         },
-                        cancel: function() {
-
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
                         }
                     });
                     wx.onMenuShareQQ({
-                        title: '分享333333333333',
-                        desc: '测试分享333333333333',
-                        link: window.location.href,
-                        imgUrl: 'http://orthophoto.allinmd.cn/static/images/wap/shareImg.png',
-                        success: function() {
-
+                        title: '分享到QQ', // 分享标题
+                        desc: '', // 分享描述
+                        link: '', // 分享链接
+                        imgUrl: '', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
                         },
-                        cancel: function() {
-
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+                    wx.onMenuShareWeibo({
+                        title: '分享到腾讯微博', // 分享标题
+                        desc: '', // 分享描述
+                        link: '', // 分享链接
+                        imgUrl: '', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+                    wx.onMenuShareQZone({
+                        title: '分享到QQ空间', // 分享标题
+                        desc: '', // 分享描述
+                        link: '', // 分享链接
+                        imgUrl: '', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
                         }
                     });
                 })
