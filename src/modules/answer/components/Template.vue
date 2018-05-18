@@ -56,17 +56,15 @@
             next(index,item){
                 let that = this;
                 item.index = index;
-                if(that.itemNum === that.itemDetail.length){
-                    that.choosedNum = index;
-                    that.choosedId = item.topic_answer_id;
+                that.choosedNum = index;                 //判断用户点击的索引用于展示相应的样式
+                that.choosedId = item.topic_answer_id;   //获取题目的序列号
+                if(that.itemNum === that.itemDetail.length){获取
                     setTimeout(function(){
                         that.choosedNum = null;     //进入下一题索引置空，无展示
                         that.$router.push('result');
                         that.addNum(item);
                     },500);
                 }else{
-                    that.choosedNum = index;         //判断用户点击的索引用于展示相应的样式
-                    that.choosedId = item.topic_answer_id;
                     setTimeout(function(){
                         that.choosedNum = null;     //进入下一题索引置空，无展示
                         that.addNum(item);
