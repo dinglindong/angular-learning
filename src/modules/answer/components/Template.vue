@@ -58,7 +58,7 @@
                 item.index = index;
                 that.choosedNum = index;                 //判断用户点击的索引用于展示相应的样式
                 that.choosedId = item.topic_answer_id;   //获取题目的序列号
-                if(that.itemNum === that.itemDetail.length){获取
+                if(that.itemNum === that.itemDetail.length){
                     setTimeout(function(){
                         that.choosedNum = null;     //进入下一题索引置空，无展示
                         that.$router.push('result');
