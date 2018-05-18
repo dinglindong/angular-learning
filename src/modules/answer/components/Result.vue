@@ -31,5 +31,5 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import 'scss/pages/answer/result.scss';
+    @import 'static/scss/pages/answer/result.scss';
 </style>

@@ -28,5 +28,3 @@ const commPopup = {
     }
 };
 export default  commPopup;
-window.popup = commPopup.popup;
-window.popupFn = commPopup.popupFn;

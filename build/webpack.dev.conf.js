@@ -41,7 +41,7 @@ let pages = ((globalPath)=>{
   glob.sync(globalPath).forEach((pagePath)=>{
     //TODO:单层级目录文件打包
     //var basename = path.basename(pagePath, path.extname(pagePath));
-    // TODO 多层级页面打包编译逻辑 2017.11.20 姚乔，王宁，李春辉
+    // TODO 多层级页面打包编译逻辑 2017.11.20
     var basename = pagePath.substring(pagePath.indexOf("modules/")+8,pagePath.lastIndexOf("/"));
     pageName = basename;
     htmlFiles[pageName] = {};

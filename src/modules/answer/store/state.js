@@ -245,7 +245,7 @@ const state = {
             "topic_name": "题目五",
             "active_id": 1,
             "active_title": "请选择：图中XXX是八级股性关节炎？",
-            "active_img": "http://img.zcool.cn/community/01c9af58244344a84a0e282b923b37.jpg",
+            "active_img": "http://img0.imgtn.bdimg.com/it/u=3725111314,3204839544&fm=27&gp=0.jpg",
             "active_topic_phase": "第一周",
             "active_start_time": "1479139200",
             "active_end_time": "1482163200",

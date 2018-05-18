@@ -32,7 +32,6 @@
         data(){
             return {
                 isFirst:true,
-                imgList: "/static/images/1-1.jpg",
                 itemId: null,       //题目ID
                 choosedNum: null,   //选中答案索引
                 choosedId:null,     //选中答案id
@@ -94,5 +93,5 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import 'scss/pages/answer/template.scss';
+    @import 'static/scss/pages/answer/template.scss';
 </style>

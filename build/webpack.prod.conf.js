@@ -120,7 +120,7 @@ let pages = ((globalPath)=>{
   glob.sync(globalPath).forEach((pagePath)=>{
     //TODO:单层级目录文件打包
     // var basename = path.basename(pagePath, path.extname(pagePath));
-    // TODO 多层级页面打包编译逻辑 2017.11.20 姚乔，王宁，李春辉
+    // TODO 多层级页面打包编译逻辑 2017.11.20
     var basename = path.normalize(pagePath.substring(pagePath.indexOf("modules/")+8,pagePath.lastIndexOf("/")));
     basename=basename.replace("\\","/");
     pageName = basename;
@@ -149,7 +149,7 @@ for (let entryName in pages) {
     },
     chunks:[entryName,'manifest','vendor'],
     /*
-    * Fixed By Qiangkailiang on 20170806
+    * Fixed By QKL on 20170806
     * 多页架构若不添加chunks将引入全部项目文件
     * entryName为页面唯一路径标识
     * 若有不匹配的资源文件将不被引入

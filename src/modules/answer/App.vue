@@ -11,7 +11,7 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    @import 'scss/base';
+    @import 'static/scss/base';
     .main{
         padding:0.5rem;
     }

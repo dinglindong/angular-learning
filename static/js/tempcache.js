@@ -23,7 +23,7 @@ const TempCache = {
          while (storage.key(storage.length - 1).indexOf(keyword) === 0) {
          storage.removeItem(storage.key(storage.length - 1))
          }*/
-        // TODO:2017/10/18 郑辉修改，微信授权逻辑错误
+        // TODO:2017/10/18 ZH微信授权逻辑错误
         //var wxBrowseAccessLockOn = localStorage.getItem("wxBrowseAccessLockOn");
         localStorage.clear();
         //localStorage.setItem("wxBrowseAccessLockOn", wxBrowseAccessLockOn);
