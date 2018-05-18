@@ -2,11 +2,12 @@
  * Create By lnden on 2018/4/19
  */
 
-const ADD_ITEMNUM = 'ADD_ITEMNUM';
-const REMBER_ANSWER = 'REMBER_ANSWER';
-const DELETE_ANSWER = 'DELETE_ANSWER';
-const INITIALIZE_DATA = 'INITIALIZE_DATA';
-
+import {
+    ADD_ITEMNUM,
+    REMBER_ANSWER,
+    DELETE_ANSWER,
+    INITIALIZE_DATA
+} from './mutation-types.js'
 
 const mutations = {
     //点击进入下一题
