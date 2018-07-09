@@ -4,9 +4,9 @@
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
-    "default_popup": "hello.html",
+    "default_popup": "popup.html",
     "default_title": "鼠标放上显示",
-    "default_icon": "hello_extension.png"
+    "default_icon": "images/hello_extension.png"
   },
   "commands": {
     "_execute_browser_action": {
@@ -14,11 +14,7 @@
         "default": "Ctrl+Shift+F",
         "mac": "MacCtrl+Shift+F"
       },
-      "description": "Opens hello.html"
+      "description": "Opens popup.html"
     }
-  },
-  "background":{
-    "page":"background.html",
-    "scripts": ["js/jquery-1.9.1.min.js","js/background.js"]
   }
 }
