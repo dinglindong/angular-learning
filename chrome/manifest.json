@@ -1,20 +1,12 @@
 {
-  "name": "Hello Extensions",
-  "description" : "Hello world Extension",
-  "version": "1.0",
   "manifest_version": 2,
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_title": "鼠标放上显示",
-    "default_icon": "images/hello_extension.png"
-  },
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "mac": "MacCtrl+Shift+F"
-      },
-      "description": "Opens popup.html"
+  "name": "永远点不到的搜索按钮",
+  "version": "1.0",
+  "description": "让你永远也点击不到Google的搜索按钮",
+  "content_scripts": [
+    {
+      "matches": ["*://www.google.com/"],
+      "js": ["js/cannot_touch.js"]
     }
-  }
-}
+  ]
+} 
