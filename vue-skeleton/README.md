@@ -1,6 +1,6 @@
 # vue-skeleton
 
-> A Vue.js project
+> This is a demo of the vue skeleton screen
 
 ## Build Setup
 
