@@ -30,7 +30,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     console.log(chalk.yellow(
       '  提示：编译后的文件需在HTTP服务下启用.\n' +
       '  直接开启index.html将无法访问.\n'+
-      '  多页文件编译至/dist目录下，唯医项目组之Webpack打包请联系李春辉完成.\n'+
+      '  多页文件编译至/dist目录下，demo项目组之Webpack打包请联系lnden完成.\n'+
       '  严禁在不通知其他开发人员时进行打包构建.\n'
     ))
   })
