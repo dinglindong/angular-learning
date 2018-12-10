@@ -50,8 +50,8 @@ let pages = ((globalPath)=>{
 
   });
   return htmlFiles;
-// })(utils.resolve('src')+'/modules/**/*.html');
-})(utils.resolve('src')+'/modules/webphoto/*.html');
+})(utils.resolve('src')+'/modules/**/*.html');
+// })(utils.resolve('src')+'/modules/webphoto/*.html');
 
 for (let entryName in pages) {
   let conf = {

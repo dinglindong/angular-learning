@@ -1,31 +1,57 @@
 <template>
-    <section>
-        我是App组件
+    <section class="al-mainInner">
+        <transition :name="transitionName">
+            <router-view class="Router"></router-view>
+        </transition>
     </section>
 </template>
 
 <script>
-    import axios from "axios"
     export default {
-        mounted(){
-//            axios({
-//                url: '/api/executeAnalysis',
-//                method: "POST",
-//                data: {
-//
-//                },
-//                transformRequest: [function (data) {
-//                    return "paramJson=" + JSON.stringify(data);
-//                }],
-//                headers: {
-//                    'X-Requested-With': 'XMLHttpRequest'
-//                },
-//                timeout: 30000
-//            }).then(function (res) {});
+        data(){
+            return {
+                transitionName:''
+            }
+        },
+        watch:{
+            '$route' (to, from) {
+                console.log(to)
+                if(to.path!='/'){
+                    let isBack = this.$router.isBack;
+                    if(isBack) {
+                        this.transitionName = 'slide-right'
+                    } else {
+                        this.transitionName = 'slide-left'
+                    }
+                    this.$router.isBack = false
+                }
+            }
         }
     }
 </script>
 
-<style scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
+    .al-mainInner{
+        font-size:.6rem;
+        .Router {
+            position: absolute;
+            width: 100%;
+            transition: all .8s ease;
+            top: 40px;
+        }
 
+        .slide-left-enter,
+        .slide-right-leave-active {
+            opacity: 0;
+            -webkit-transform: translate(100%, 0);
+            transform: translate(100%, 0);
+        }
+
+        .slide-left-leave-active,
+        .slide-right-enter {
+            opacity: 0;
+            -webkit-transform: translate(-100%, 0);
+            transform: translate(-100% 0);
+        }
+    }
 </style>
