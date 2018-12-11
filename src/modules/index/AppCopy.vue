@@ -28,15 +28,17 @@
         name: "AppCopy",
         data(){
             return {
-                run: "left"
+                run: ""
             }
         },
         watch: {
             $route(to, from) {
-                if (to.meta.index > from.meta.index) {
-                    this.run = "right";
-                } else {
-                    this.run = "left";
+                if(to.path!='/'){
+                    if (to.meta.index > from.meta.index) {
+                        this.run = "right";
+                    } else {
+                        this.run = "left";
+                    }
                 }
             }
         }
