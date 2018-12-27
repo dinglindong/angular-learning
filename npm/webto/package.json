@@ -1,0 +1,21 @@
+{
+  "name": "webto",
+  "version": "1.0.3",
+  "description": "htmltopdf htmltophoto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "htmltopdf",
+    "htmltophoto",
+    "pdf",
+    "photo"
+  ],
+  "dependencies": {
+    "html2canvas": "^1.0.0-alpha.12",
+    "jspdf": "~1.4.1"
+  },
+  "author": "lnden",
+  "license": "ISC"
+}
