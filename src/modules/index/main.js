@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App';
-// import AppCopy from './AppCopy';
+// import App from './AppCopy';
 
 import router from './router'
 

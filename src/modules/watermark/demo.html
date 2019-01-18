@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function addWaterMarker(str){
+        var can = document.createElement('canvas');
+        var body = document.body;
+        body.appendChild(can);
+        can.width=300;
+        can.height=200;
+        can.style.display='none';
+        var cans = can.getContext('2d');
+        cans.rotate(45*Math.PI/180);
+        cans.translate(30,-90);
+        cans.font = "30px Microsoft JhengHei";
+        cans.fillStyle = "rgba(17, 17, 17, 0.50)";
+        cans.textAlign = 'left';
+        cans.textBaseline = 'Middle';
+        cans.fillText(str,can.width/3,can.height/2);
+
+        let img = document.createElement('img');
+        img.alt = str;
+        img.src = can.toDataURL("image/png");
+        body.appendChild(img)
+    }
+    addWaterMarker('admin');
+</script>
+</body>
+</html>
