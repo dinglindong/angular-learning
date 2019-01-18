@@ -8,7 +8,7 @@ var proxyTable = {
         target: 'https://medical.aliyun.com/dicom/api/',
         changeOrigin: true,
         pathRewrite: {
-            '^/api': 'http://orthophoto.allinmd.cn/'
+            '^/api': 'http://orthophoto.axxxxmd.cn/'
         }
     }
 }

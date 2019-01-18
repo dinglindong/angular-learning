@@ -15,7 +15,7 @@
         mounted(){
             let that = this;
             $.ajax({
-                url: 'http://m.allinmd.cn/mcall/wx/api/getJSConfig/',
+                url: 'http://m.axxxxmd.cn/mcall/wx/api/getJSConfig/',
                 type:'POST',
                 data:{
                     paramJson: $.toJSON({
