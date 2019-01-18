@@ -14,7 +14,7 @@ for (let moduleName of modules) {
     console.log("----"+path.join(utils.resolve('src'),'modules',moduleName,'main.js')+'------');
 }
 console.log(buildEntries);*/
-//TODO 多层级页面打包编译逻辑 2017.11.20 姚乔，王宁，李春辉
+//TODO 多层级页面打包编译逻辑
 readDirSync(modules);
 
 function readDirSync(modules,parentPath){
