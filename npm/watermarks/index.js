@@ -1,3 +1,11 @@
+﻿/**
+ * @author Lnden
+ * @date 2019/1/22
+ * @desc 文件描述
+ * @param {Object} [title]  - 参数说明
+ * @example 调用示例
+ */
+
 /**
  * @author Lnden
  * @date 2019/1/22
@@ -8,7 +16,7 @@
 
 class Watermark {
     constructor(){
-        config = {
+        this.configs = {
             el:document.body,
             color:'#efefef',
             size:'30px',
@@ -17,13 +25,10 @@ class Watermark {
             rotate:45*Math.PI/180,
             translatex:30,
             translatey:-90
-        };
+        }
     }
-    canvas(str,options){
-        let config = {
-            ...this.config,
-            ...options
-        };
+    canvas(str,options={}){
+        let config = Object.assign(this.configs,options);
         let canvas = document.createElement('canvas');
         let body = document.body;
         body.appendChild(canvas);

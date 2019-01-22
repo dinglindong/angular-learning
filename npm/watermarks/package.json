@@ -1,7 +1,7 @@
 {
   "name": "watermarks",
-  "version": "1.0.0",
-  "description": "watermark \u0016gater canvas",
+  "version": "1.0.2",
+  "description": "watermark gater canvas",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "keywords": [
     "canvas",
     "watermark",
-    "..."
+    "class"
   ],
   "author": "lnden",
   "license": "ISC"

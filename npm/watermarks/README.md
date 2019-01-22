@@ -1,6 +1,6 @@
-### watermarks
+﻿### watermarks
 
-watermark为水印方法集
+watermarks为水印方法集
 
 ### canvas
 
