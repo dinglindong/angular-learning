@@ -13,7 +13,22 @@
      */
 
     export default {
-        name: "index"
+        name: "index",
+        mounted(){
+            let lastTime = new Date().getTime()
+            let currentTime = new Date().getTime()
+            const TIMEOUT = 10 * 60 * 1000  // 设置超时事件 10分
+            document.addEventListener('mouseover',(ev)=>{
+                lastTime = new Date().getTime()
+            })
+            function testTime(){
+                currentTime = new Date().getTime()
+                if(currentTime - lastTime > TIMEOUT){
+                    console.log('超时')
+                }
+            }
+            window.setInterval(testTime, 1000);
+        }
     }
 </script>
 

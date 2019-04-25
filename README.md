@@ -2,12 +2,19 @@
 
 
 src/modules  --  多页应用
+
 &emsp;&emsp;index  --  vue移动端页面切换动画
+
 &emsp;&emsp;answer  --  答题列表页面
+
 &emsp;&emsp;watermark  --  添加水印
+
 &emsp;&emsp;webpdf  --  页面转换PDF
+
 &emsp;&emsp;webphoto  --  页面转换PHOTO
+
 &emsp;&emsp;weChatShare  --  页面分享
+
 &emsp;&emsp;autologout  --  自动登出
 
 chrome          --chrome扩展
