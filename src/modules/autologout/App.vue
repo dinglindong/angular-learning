@@ -1,6 +1,6 @@
 <template>
     <section class="index">
-        
+        测试 1 分钟无任何操作自动退出系统
     </section>
 </template>
 
@@ -17,21 +17,26 @@
         mounted(){
             let lastTime = new Date().getTime()
             let currentTime = new Date().getTime()
-            const TIMEOUT = 10 * 60 * 1000  // 设置超时事件 10分
+            const TIMEOUT = 1 * 60 * 1000  // 设置超时事件 10分
             document.addEventListener('mouseover',(ev)=>{
                 lastTime = new Date().getTime()
             })
             function testTime(){
                 currentTime = new Date().getTime()
                 if(currentTime - lastTime > TIMEOUT){
-                    console.log('超时')
+                    alert('已经超过一分钟，自动退出系统')
+                    clearInterval(clear)
                 }
             }
-            window.setInterval(testTime, 1000);
+            let clear = window.setInterval(testTime, 1000);
         }
     }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-
+    .index{
+        margin:200px auto;
+        height:200px;
+        width:200px;
+    }
 </style>
