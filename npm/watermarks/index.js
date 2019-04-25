@@ -6,14 +6,6 @@
  * @example 调用示例
  */
 
-/**
- * @author Lnden
- * @date 2019/1/22
- * @desc 文件描述
- * @param {Object} [title]  - 参数说明
- * @example 调用示例
- */
-
 class Watermark {
     constructor(){
         this.configs = {
