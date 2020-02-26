@@ -1,0 +1,17 @@
+{
+  "name": "tswebto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/html2canvas": "^0.0.35",
+    "@types/jspdf": "^1.3.3",
+    "html2canvas": "^1.0.0-rc.5",
+    "jspdf": "^1.5.3"
+  }
+}
