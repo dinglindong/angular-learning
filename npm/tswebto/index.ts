@@ -12,19 +12,19 @@ import JsPDF from 'jspdf'
 
 const pdf = {
     install: function (Vue: any) {
-        Vue.prototype.getPdf = (dom: any, title: string) => {
-            const newTitle = title;
+        Vue.prototype.getPdf = (dom: any) => {
             const c = document.createElement('canvas');
             const opts = {
                 scale: 2,
                 canvas: c,
                 logging: true,
-                width: document.querySelector(dom).offsetWidth * 2,
-                height: document.querySelector(dom).offsetHeight * 2,
+                width: document.querySelector(dom).offsetWidth,
+                height: document.querySelector(dom).offsetHeight,
+                useCORS: true,
             };
-            c.width = document.body.clientWidth;
-            c.height = document.body.clientHeight;
-            html2Canvas(document.querySelector(dom), opts).then((canvas) => {
+            c.width =  document.querySelector(dom).offsetWidth * 2;
+            c.height = document.querySelector(dom).offsetHeight *2;
+            return html2Canvas(document.querySelector(dom), opts).then((canvas) => {
                 const contentWidth = canvas.width;
                 const contentHeight = canvas.height;
                 const pageHeight = contentWidth / 592.28 * 841.89;
@@ -46,7 +46,8 @@ const pdf = {
                         }
                     }
                 }
-                PDF.save(`${newTitle}.pdf`);
+                let pdfData = PDF.output('datauristring');
+                return pdfData;
             });
         };
     },

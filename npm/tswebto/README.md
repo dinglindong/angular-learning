@@ -34,5 +34,7 @@ Vue.use(webto.pdf)
     }
 ```
 
+## 返回promise对象，生成的二进制
 
 
+## 使页面图片可以生成pdf
