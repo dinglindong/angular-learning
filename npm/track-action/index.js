@@ -16,10 +16,10 @@ const request = (option) => {
             xmlHttp = new XMLHttpRequest()
         }
         if (option.method.toLowerCase() === 'get') {
-            xmlHttp.open(option.method, option.baseURL + option.url + '?' + str, true);
+            xmlHttp.open(option.method, option.baseURL + '?' + str, true);
             xmlHttp.send()
         } else if (option.method.toLowerCase() === 'post') {
-            xmlHttp.open(option.method, option.baseURL + option.url, true);
+            xmlHttp.open(option.method, option.baseURL, true);
             xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             for (const key in option.headers) {
                 xmlHttp.setRequestHeader(key, option.headers[key])

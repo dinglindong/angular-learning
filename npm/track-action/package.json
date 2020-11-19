@@ -1,6 +1,6 @@
 {
   "name": "track-action",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "this is an event track request encapsulation",
   "main": "index.js",
   "scripts": {
