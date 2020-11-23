@@ -98,6 +98,14 @@ export function renderLabel(h, data, context) {
   if (data.checked) {
     cls.push("selected");
   }
+
+  switch (data.level) {
+    case 1:cls.push("firsts");break;
+    case 2:cls.push("seconds");break;
+    case 3:cls.push("thirds");break;
+    default:cls.push("collection");
+  }
+
   let { labelWidth, labelClassName, selectedClassName, selectedKey } = props;
 
   if (typeof labelWidth === "number") {
@@ -126,6 +134,11 @@ export function renderLabel(h, data, context) {
       domProps: {
         className: "org-tree-node-label",
       },
+      on: {
+        click: createListener(clickHandler, data),
+        mouseout: createListener(mouseOutHandler, data),
+        mouseover: createListener(mouseOverHandler, data),
+      },
     },
     [
       h(
@@ -135,11 +148,6 @@ export function renderLabel(h, data, context) {
             className: cls.join(" "),
           },
           style: { width: labelWidth },
-          on: {
-            click: createListener(clickHandler, data),
-            mouseout: createListener(mouseOutHandler, data),
-            mouseover: createListener(mouseOverHandler, data),
-          },
         },
         childNodes
       ),
