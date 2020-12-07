@@ -110,7 +110,7 @@
     "vueg": "^1.2.6",
     "vuex": "^2.5.0",
     "webpack": "^3.0.0",
-    "webpack-bundle-analyzer": "^2.2.1",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-dev-server": "^2.10.1",
     "webpack-hot-middleware": "^2.18.0",
