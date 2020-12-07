@@ -8,7 +8,7 @@ function createListener(handler, data) {
   if (typeof handler === "function") {
     return function (e) {
       // fixed bug #48
-      if (e.target.className.indexOf("org-tree-node-btn") > -1) return;
+      if (e.target.className.indexOf("org-tree-node-labe") > -1) return;
 
       handler.apply(null, [e, data]);
     };
