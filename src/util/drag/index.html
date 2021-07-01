@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript两张图片左右拖拽对比</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+        #carbonads a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #carbonads a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="compare">
+        <div class="compare__image">
+            <img src="1.jpg">
+        </div>
+        <div class="compare__slider" id="slider"></div>
+        <div class="compare__image compare__overlay">
+            <img src="2.jpg">
+        </div>
+    </div>
+</div>
+<script>
+    let isClicked = false;
+
+    const image = document.querySelector(".compare__overlay");
+    const width = image.offsetWidth;
+    const height = image.offsetHeight;
+    const slider = document.getElementById('slider');
+    compare();
+
+    function compare() {
+        slider.style.top = height / 2 - slider.offsetHeight / 2 + "px";
+        slider.style.left = width / 2 - slider.offsetWidth / 2 + "px";
+        image.style.width = "50%";
+
+        slider.addEventListener("mousedown", onSlideStart);
+        slider.addEventListener("touchstart", onSlideStart);
+
+        window.addEventListener("mouseup", () => (isClicked = false));
+        window.addEventListener("touchstop", () => (isClicked = false));
+
+        window.addEventListener("mousemove", onSlideMove);
+        window.addEventListener("touchmove", onSlideMove);
+    }
+
+    function onSlideStart(event) {
+        event.preventDefault();
+        isClicked = true;
+    }
+
+    function onSlideMove(event) {
+        if (!isClicked) return;
+
+        doSlide(currentPosition(event));
+    }
+
+    function currentPosition(event = window.event) {
+        let xImage = image.getBoundingClientRect();
+        let x = 0;
+
+        x = event.pageX - xImage.left;
+
+        if (x < 0) x = 0;
+
+        if (x > width) x = width;
+
+        return x;
+    }
+
+    function doSlide(x) {
+        image.style.width = x + "px";
+        slider.style.left = image.offsetWidth - slider.offsetWidth / 2 + "px";
+    }
+</script>
+
+</body>
+</html>
